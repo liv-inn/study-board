@@ -1,5 +1,7 @@
 package com.project.studyboard.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,18 @@ public class MateriasService {
     public void inserirMateria(Materias materia){
         materiasDAO.inserir(materia);
     };
+
+    public List<Materias> listarMaterias() {
+        return materiasDAO.listarMaterias();
+    }
+
+    public Materias buscarpMaterias(Long id){
+        return materiasDAO.buscarPorId(id);
+    }
+
+    public void deletarMateria(Long id){
+        materiasDAO.deletar(id);
+    }
 
 
 

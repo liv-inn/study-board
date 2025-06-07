@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/studyboard_bd
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  thymeleaf:
+    cache: false 
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+
+server:
+  port: 8080

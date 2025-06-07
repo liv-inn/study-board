@@ -25,9 +25,12 @@ public class MateriasDAO {
         this.jdbc = new JdbcTemplate(dataSource);
     }
 
-    ///////////CRIAR MATERIA/////////////
 
-    //getAll
+    public void inserir(Materias materia){
+        String sql = "INSERT INTO materias(nome) VALUES(?)";
+        jdbc.update(sql, materia.getNome());
+    }
+
     public List<Materias> listarMaterias(){
         String sql = "SELECT * FROM materias";
         return jdbc.query(sql, (rs, rowNum) -> {
@@ -38,7 +41,6 @@ public class MateriasDAO {
         });
     }
 
-    //getbyid
 
     public Materias buscarPorId(Long id){
         String sql = "SELECT * FROM materias WHERE id = ?";

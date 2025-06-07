@@ -22,7 +22,7 @@ public class EstudosDAO {
     }
 
     public void inserir(Estudos estudo) {
-        String sql = "INSERTO INTO estudos(data, assunto, duracao, materia_id) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO estudos(data, assunto, duracao, materia_id) VALUES (?,?,?,?)";
         jdbc.update(sql, estudo.getData(), estudo.getAssunto(), estudo.getDuracao(), estudo.getMateriaId());
     }
 
@@ -40,6 +40,27 @@ public class EstudosDAO {
             return estudo;
         });
     }
+
+    public Estudos buscarPorId(Long id){
+          String sql = """
+            SELECT e.*, m.nome as materia_nome 
+            FROM estudos e
+            LEFT JOIN materias m ON e.materia_id = m.id 
+            WHERE e.id = ?""";
+    
+        return jdbc.queryForObject(sql, (rs, rowNum) ->
+        {
+            Estudos estudo = new Estudos();
+            estudo.setId(rs.getLong("id"));
+            estudo.setData(rs.getDate("data").toLocalDate());
+            estudo.setAssunto(rs.getString("assunto"));
+            estudo.setDuracao(rs.getInt("duracao"));
+            estudo.setMateriaId(rs.getLong("materia_id"));
+            return estudo;
+            }, id);
+            
+    }
+    
 
     //atualizar!!
     public void atualizar(Estudos estudo){
